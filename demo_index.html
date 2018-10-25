@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- <meta charset="utf-8">
+<title>Textual Entailment demo</title> -->
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+<title>Evidential Claim Verification Online Demo</title>
+<style>
+    .hiddenRow {
+        padding: 0 !important;
+    }
+</style>
+</head>
+
+<body>
+<!-- Nav bar section -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="http://cogcomp.org/images/logo.png" width="30"/>
+        Evidential Claim Verification Online Demo
+    </a>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="https://github.com/yinwenpeng/FEVER">Github</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="card mb-2">
+    <div class="card-body">
+        <p class="card-text">This is an online demo of our  paper
+            <a href="https://arxiv.org/abs/1808.03465">
+              TwoWingOS: A Two-Wing Optimization Strategy for Evidential Claim Verification
+            </a> (Yin and Roth, EMNLP'2018)
+        </p>
+        <p class="card-text">
+            It takes a claim as input, then outputs a decision ("SUPPORTED", "REFUTED" or "NOENOUGHINFO") with a list of evidence sentences from Wikipedia.
+        </p>
+        <p class="card-text">
+            The process will take about 15~45 seconds, please be patient..............
+        </p>
+    </div>
+</div>
+
+
+<table width=100% height=100% cellpadding=0 cellspacing=0>
+  <tr>
+  <td align="center" valign="middle">
+    <form action="http://macniece.seas.upenn.edu:4007" method="get">
+    Claim: <input type="text" name="premise" id="input1">  <br />
+    <!-- Hypothesis: <input type="text" name="hypothesis" id="input2"/><br /> -->
+    <input type="submit" value="Submit" />
+    </form>
+  </td>
+</tr>
+</table>
+
+
+
+<table width=100% height=100% cellpadding=0 cellspacing=0>
+  <tr>
+  <td align="center" valign="middle">
+
+<div id="result"></div>
+
+<script type="text/javascript">
+  document.querySelector('form').onsubmit = function(e)
+  {
+    e.preventDefault();
+    const input1 = document.querySelector("#input1").value;
+    // const input2 = document.querySelector("#input2").value;
+    const url = `http://macniece.seas.upenn.edu:4007?premise=${input1}`;
+    fetch(url).then(res => res.text()).then(result =>
+      {
+      console.log(result);
+      console.log(1);
+      document.querySelector("#result").innerText = result;
+    }).catch(err => console.log(err));
+    return false;
+  };
+</script>
+
+</td>
+</tr>
+</table>
+
+
+</body>
+</html>
